@@ -1,105 +1,25 @@
-name: Décompresser un zip dans le dépôt
-
+name: Décompresser le zip
 on:
   workflow_dispatch:
-    inputs:
-      zip_path:
-        description: "Chemin exact de l'archive (vide = détection automatique, quel que soit le nom)"
-        required: false
-        default: ""
-      target_dir:
-        description: "Dossier de destination (. = racine)"
-        required: false
-        default: "."
-      strip_root:
-        description: "Retirer le dossier unique qui englobe tout"
-        type: boolean
-        default: true
-      delete_zip:
-        description: "Supprimer l'archive après extraction"
-        type: boolean
-        default: true
-
+  push:
+    paths:
+      - 'archive.zip'
 permissions:
   contents: write
-
 jobs:
   unzip:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PAT || github.token }}
-
-      - name: Trouver et décompresser les archives
-        env:
-          ZIP_PATH: ${{ inputs.zip_path }}
-          TARGET: ${{ inputs.target_dir }}
-          STRIP_ROOT: ${{ inputs.strip_root }}
-          DELETE_ZIP: ${{ inputs.delete_zip }}
+      - name: Décompresser
         run: |
-          set -eu
-          ROOT="$PWD"
-          LIST=$(mktemp)
-
-          # 1. Trouver les archives (par signature, pas par nom)
-          if [ -n "$ZIP_PATH" ]; then
-            echo "$ZIP_PATH" > "$LIST"
-          else
-            find . -type f -not -path './.git/*' \
-              -not -iname '*.docx' -not -iname '*.xlsx' -not -iname '*.pptx' \
-              -not -iname '*.odt' -not -iname '*.ods' -not -iname '*.jar' \
-              -not -iname '*.apk' -not -iname '*.epub' -print0 |
-            while IFS= read -r -d '' f; do
-              if [ "$(head -c 4 "$f" | od -An -tx1 | tr -d ' \n')" = "504b0304" ]; then
-                echo "$f"
-              fi
-            done > "$LIST"
-          fi
-
-          if [ ! -s "$LIST" ]; then
-            echo "::error::Aucune archive ZIP trouvée dans le dépôt"
-            echo "Fichiers présents :"; find . -type f -not -path './.git/*' | head -50
-            exit 1
-          fi
-          echo "Archives détectées :"; cat "$LIST"
-
-          # 2. Extraire chaque archive
-          while IFS= read -r ZIP; do
-            echo "=== Traitement de : $ZIP"
-            TMP=$(mktemp -d)
-            unzip -q -o "$ZIP" -d "$TMP"
-            rm -rf "$TMP/__MACOSX"
-            find "$TMP" -name '.DS_Store' -delete
-
-            SRC="$TMP"
-            if [ "$STRIP_ROOT" = "true" ]; then
-              COUNT=$(find "$TMP" -mindepth 1 -maxdepth 1 | wc -l)
-              if [ "$COUNT" -eq 1 ]; then
-                ONLY=$(find "$TMP" -mindepth 1 -maxdepth 1)
-                if [ -d "$ONLY" ]; then
-                  echo "Dossier englobant retiré : $(basename "$ONLY")"
-                  SRC="$ONLY"
-                fi
-              fi
-            fi
-
-            mkdir -p "$ROOT/$TARGET"
-            rsync -a --exclude='.git/' "$SRC"/ "$ROOT/$TARGET"/
-
-            if [ "$DELETE_ZIP" = "true" ]; then
-              rm -f "$ROOT/$ZIP"
-            fi
-          done < "$LIST"
-
-      - name: Commit et push
+          unzip -o archive.zip -d .
+          rm archive.zip
+      - name: Enregistrer
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
           git add -A
-          if git diff --cached --quiet; then
-            echo "Aucun changement à commiter"
-          else
-            git commit -m "Extraction de l'archive zip"
-            git push
-          fi
+          git commit -m "Ajout des fichiers depuis le zip" || echo "Rien à ajouter"
+          git push
+      
