@@ -1,0 +1,28 @@
+name = "okm-football-academie"
+compatibility_date = "2026-10-01"
+pages_build_output_dir = "./public"
+
+# --- Base de donnees D1 et stockage R2 ---
+[[d1_databases]]
+binding = "DB"
+database_name = "okm-db"
+database_id = "63bce337-ed63-4ed1-9dba-c685656c1aaa"
+migrations_dir = "migrations"
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "okm-media"
+
+# Variables publiques (sans danger dans Git). La clé « publishable » Supabase est faite pour être publique.
+[vars]
+SUPABASE_URL = "https://cgarsdxwufknkzygyvpx.supabase.co"
+SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ZDdxWAcGk3Ml3ncs42dBeQ_9_7R8Kn3"
+SITE_URL = "https://okmfootball.digitsolution.org"
+# Adresse e-mail du compte administrateur créé dans Supabase : elle devient « Administrateur général » à sa première connexion.
+ADMIN_EMAIL = "ketienndassi67@gmail.com"
+ADMIN_NAME = "Administrateur OKM"
+
+# Variables secrètes (à créer dans Cloudflare, jamais dans ce fichier) :
+#   SUPABASE_SERVICE_KEY  facultatif : clé « secret » Supabase, pour créer des comptes depuis le menu Comptes
+#   SETUP_TOKEN        inutile avec Supabase (mode sans Supabase seulement)
+#   TURNSTILE_SECRET   clé secrète Turnstile (facultatif)
+#   PBKDF2_ITERATIONS  facultatif, voir README

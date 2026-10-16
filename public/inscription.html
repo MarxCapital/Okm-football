@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inscription | OKM Football Académie</title>
+<meta name="description" content="Demandez l'inscription de votre enfant à OKM Football Académie. L'envoi d'une demande ne vaut pas admission.">
+<meta name="theme-color" content="#fffaf0">
+<meta property="og:title" content="Inscription | OKM Football Académie">
+<meta property="og:image" content="https://okmfootball.digitsolution.org/assets/img/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<link rel="canonical" href="https://okmfootball.digitsolution.org/inscription">
+<meta property="og:url" content="https://okmfootball.digitsolution.org/inscription">
+<link rel="icon" href="/assets/img/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&amp;family=DM+Sans:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="module" src="/assets/js/main.js"></script>
+</head>
+<body data-page="inscription" data-nav="inscription">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div id="site-header"></div>
+
+<main id="contenu">
+  <section class="page-hero">
+    <div class="wrap">
+      <p class="crumbs"><a href="/">Accueil</a> / Inscription</p>
+      <h1 class="disp h2">Demande d'inscription</h1>
+      <p>Remplissez ce formulaire. L'académie étudie chaque demande et répond à la famille. Envoyer une demande ne vaut pas admission.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap grid split">
+      <form class="form" id="form-inscription" data-endpoint="registrations" data-success="Votre demande a bien été enregistrée. L'académie l'étudiera et contactera le responsable légal. Elle ne vaut pas admission." novalidate>
+        <fieldset>
+          <legend>Le candidat</legend>
+          <div class="form-row">
+            <div class="field">
+              <label for="firstName">Prénom <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="firstName" name="firstName" type="text" autocomplete="off" maxlength="80" required aria-describedby="err-firstName">
+              <p class="field-error" id="err-firstName" data-error-for="firstName" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="lastName">Nom <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="lastName" name="lastName" type="text" autocomplete="off" maxlength="80" required aria-describedby="err-lastName">
+              <p class="field-error" id="err-lastName" data-error-for="lastName" role="alert"></p>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="birthYear">Année de naissance <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="birthYear" name="birthYear" type="number" inputmode="numeric" step="1" required aria-describedby="hint-birthYear err-birthYear">
+              <p class="hint" id="hint-birthYear">Quatre chiffres, par exemple 2012.</p>
+              <p class="field-error" id="err-birthYear" data-error-for="birthYear" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="category">Catégorie souhaitée <span class="req" aria-hidden="true">*</span></label>
+              <select class="select" id="category" name="category" required data-categories aria-describedby="err-category">
+                <option value="">Choisir…</option>
+              </select>
+              <p class="field-error" id="err-category" data-error-for="category" role="alert"></p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="position">Poste de jeu</label>
+            <select class="select" id="position" name="position">
+              <option value="">Je ne sais pas</option>
+              <option value="Gardien">Gardien</option>
+              <option value="Défenseur">Défenseur</option>
+              <option value="Milieu">Milieu</option>
+              <option value="Attaquant">Attaquant</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Le responsable légal</legend>
+          <div class="field">
+            <label for="guardianName">Nom du parent ou responsable <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="guardianName" name="guardianName" type="text" autocomplete="name" maxlength="120" required aria-describedby="err-guardianName">
+            <p class="field-error" id="err-guardianName" data-error-for="guardianName" role="alert"></p>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="guardianPhone">Numéro de téléphone <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="guardianPhone" name="guardianPhone" type="tel" autocomplete="tel" inputmode="tel" pattern="[+0-9 \(\)\.\-]{6,20}" data-msg="Saisissez un numéro valide, par exemple +242 06 000 00 00." required aria-describedby="err-guardianPhone">
+              <p class="field-error" id="err-guardianPhone" data-error-for="guardianPhone" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="email">Adresse e-mail</label>
+              <input class="input" id="email" name="email" type="email" autocomplete="email" maxlength="160" aria-describedby="hint-email err-email">
+              <p class="hint" id="hint-email">Facultative.</p>
+              <p class="field-error" id="err-email" data-error-for="email" role="alert"></p>
+            </div>
+          </div>
+          <div class="field">
+            <label for="message">Message complémentaire</label>
+            <textarea class="textarea" id="message" name="message" maxlength="1000"></textarea>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <div class="check">
+            <input type="checkbox" id="consent" name="consent" required aria-describedby="err-consent">
+            <label for="consent">Je suis le parent ou le responsable légal du candidat. J'accepte que ces informations servent à étudier la demande d'inscription.</label>
+          </div>
+          <p class="field-error" id="err-consent" data-error-for="consent" role="alert"></p>
+        </div>
+
+        <div class="hp" aria-hidden="true">
+          <label for="website">Ne pas remplir ce champ</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="turnstile"></div>
+
+        <div class="stack stack--sm">
+          <button class="btn btn--dark" type="submit">Envoyer la demande</button>
+          <div data-status role="status" hidden></div>
+        </div>
+      </form>
+
+      <aside class="stack" aria-label="Après l'envoi">
+        <h2 class="disp h3">Après l'envoi</h2>
+        <ol class="steps">
+          <li class="step"><span class="disp">1</span><div><p><strong>Votre demande est enregistrée</strong></p><p class="small muted">Elle est transmise à l'académie dans un espace sécurisé.</p></div></li>
+          <li class="step"><span class="disp">2</span><div><p><strong>Un responsable l'étudie</strong></p><p class="small muted">La demande passe de « nouvelle » à « en cours ».</p></div></li>
+          <li class="step"><span class="disp">3</span><div><p><strong>L'académie vous répond</strong></p><p class="small muted">La demande est acceptée ou refusée, et la famille est contactée.</p></div></li>
+        </ol>
+        <p class="small muted">Seules les informations utiles à l'étude de la demande sont demandées. Voir les <a class="more" href="/mentions-legales#donnees">données personnelles</a>.</p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+</body>
+</html>
