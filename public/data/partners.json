@@ -1,6 +1,0 @@
-[
-  { "id": "pa-001", "example": true, "name": "[Partenaire 1]", "logo": "", "description": "[Présentation approuvée par l'académie.]", "support": "[Nature du soutien]", "website": "", "period": "[Période]", "showPeriod": false, "approved": true },
-  { "id": "pa-002", "example": true, "name": "[Partenaire 2]", "logo": "", "description": "[Présentation approuvée par l'académie.]", "support": "[Nature du soutien]", "website": "", "period": "", "showPeriod": false, "approved": true },
-  { "id": "pa-003", "example": true, "name": "[Partenaire 3]", "logo": "", "description": "[Présentation approuvée par l'académie.]", "support": "[Nature du soutien]", "website": "", "period": "", "showPeriod": false, "approved": true },
-  { "id": "pa-004", "example": true, "name": "[Partenaire en attente d'approbation (jamais affiché)]", "logo": "", "description": "", "support": "", "website": "", "period": "", "showPeriod": false, "approved": false }
-]
