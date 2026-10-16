@@ -1,0 +1,31 @@
+[
+  {
+    "id": "n-001", "example": true, "slug": "titre-actualite-une", "status": "publie", "category": "Match",
+    "title": "[Titre de l'actualité à la une]", "excerpt": "[Début du contenu rédactionnel, deux lignes maximum.]",
+    "content": ["[Premier paragraphe de l'actualité.]", "[Deuxième paragraphe de l'actualité.]"],
+    "image": "", "imageAlt": "", "author": "[Responsable de publication]", "publishedAt": "2026-10-12T09:00:00+01:00"
+  },
+  {
+    "id": "n-002", "example": true, "slug": "titre-deuxieme-actualite", "status": "publie", "category": "Académie",
+    "title": "[Titre de la deuxième actualité]", "excerpt": "[Début du contenu rédactionnel, deux lignes maximum.]",
+    "content": ["[Contenu de l'actualité.]"],
+    "image": "", "imageAlt": "", "author": "[Responsable de publication]", "publishedAt": "2026-10-08T09:00:00+01:00"
+  },
+  {
+    "id": "n-003", "example": true, "slug": "titre-troisieme-actualite", "status": "publie", "category": "Partenaires",
+    "title": "[Titre de la troisième actualité]", "excerpt": "[Début du contenu rédactionnel, deux lignes maximum.]",
+    "content": ["[Contenu de l'actualité.]"],
+    "image": "", "imageAlt": "", "author": "[Responsable de publication]", "publishedAt": "2026-10-02T09:00:00+01:00"
+  },
+  {
+    "id": "n-004", "example": true, "slug": "titre-quatrieme-actualite", "status": "publie", "category": "Match",
+    "title": "[Titre de la quatrième actualité]", "excerpt": "[Début du contenu rédactionnel, deux lignes maximum.]",
+    "content": ["[Contenu de l'actualité.]"],
+    "image": "", "imageAlt": "", "author": "[Responsable de publication]", "publishedAt": "2026-09-25T09:00:00+01:00"
+  },
+  {
+    "id": "n-005", "example": true, "slug": "brouillon-non-publie", "status": "brouillon", "category": "Académie",
+    "title": "[Brouillon : jamais affiché au public]", "excerpt": "", "content": ["[Contenu en préparation.]"],
+    "image": "", "imageAlt": "", "author": "[Responsable de publication]", "publishedAt": "2026-10-13T09:00:00+01:00"
+  }
+]
