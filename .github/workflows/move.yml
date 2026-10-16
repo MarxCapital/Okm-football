@@ -11,8 +11,8 @@ jobs:
       - name: Déplacer
         run: |
           shopt -s dotglob
-          mv okm-football-academy/* .
-          rmdir okm-football-academy
+          mv okm-football-academie/* .
+          rmdir okm-football-academie
       - name: Enregistrer
         run: |
           git config user.name "github-actions"
