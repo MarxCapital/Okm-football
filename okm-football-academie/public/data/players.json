@@ -1,8 +1,0 @@
-[
-  { "id": "p-001", "example": true, "publicName": "Joueur Exemple A", "category": "U15", "position": "Attaquant", "foot": "Droit", "photo": "", "stats": { "matches": 0, "goals": 0, "assists": 0 }, "published": true, "consent": true },
-  { "id": "p-002", "example": true, "publicName": "Joueur Exemple B", "category": "U15", "position": "Milieu", "foot": "Gauche", "photo": "", "stats": { "matches": 0, "goals": 0, "assists": 0 }, "published": true, "consent": true },
-  { "id": "p-003", "example": true, "publicName": "Joueur Exemple C", "category": "U13", "position": "Gardien", "foot": "", "photo": "", "published": true, "consent": true },
-  { "id": "p-004", "example": true, "publicName": "Joueur Exemple D", "category": "U17", "position": "Défenseur", "foot": "Droit", "photo": "", "published": true, "consent": true },
-  { "id": "p-005", "example": true, "publicName": "Profil sans autorisation (jamais affiché)", "category": "U13", "position": "Milieu", "photo": "", "published": true, "consent": false },
-  { "id": "p-006", "example": true, "publicName": "Profil non publié (jamais affiché)", "category": "U17", "position": "Attaquant", "photo": "", "published": false, "consent": true }
-]

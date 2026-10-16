@@ -1,9 +1,0 @@
-[
-  { "id": "m-001", "example": true, "category": "U15", "opponent": "[Adversaire]", "competition": "[Compétition]", "datetime": "2026-10-17T15:30:00+01:00", "venue": "[Stade ou terrain]", "home": true, "status": "programme" },
-  { "id": "m-002", "example": true, "category": "U13", "opponent": "[Adversaire]", "competition": "[Compétition]", "datetime": "2026-10-18T10:00:00+01:00", "venue": "[Stade ou terrain]", "home": false, "status": "programme" },
-  { "id": "m-003", "example": true, "category": "U17", "opponent": "[Adversaire]", "competition": "[Compétition]", "datetime": "2026-10-24T16:00:00+01:00", "venue": "[Stade ou terrain]", "home": true, "status": "reporte" },
-  { "id": "m-004", "example": true, "category": "U15", "opponent": "[Adversaire]", "competition": "[Compétition]", "datetime": "2026-10-10T15:30:00+01:00", "venue": "[Stade ou terrain]", "home": true, "status": "termine", "validated": true, "ourScore": 3, "theirScore": 1, "scorers": ["[Buteur]", "[Buteur]"], "notes": "[Observation sportive]" },
-  { "id": "m-005", "example": true, "category": "U13", "opponent": "[Adversaire]", "competition": "[Compétition]", "datetime": "2026-10-11T10:00:00+01:00", "venue": "[Stade ou terrain]", "home": false, "status": "termine", "validated": true, "ourScore": 0, "theirScore": 0 },
-  { "id": "m-006", "example": true, "category": "U17", "opponent": "[Adversaire]", "competition": "[Compétition]", "datetime": "2026-10-11T16:00:00+01:00", "venue": "[Stade ou terrain]", "home": true, "status": "termine", "validated": true, "ourScore": 1, "theirScore": 2 },
-  { "id": "m-007", "example": true, "category": "U17", "opponent": "[Adversaire]", "competition": "[Compétition]", "datetime": "2026-10-04T16:00:00+01:00", "venue": "[Stade ou terrain]", "home": false, "status": "termine", "validated": false, "ourScore": 2, "theirScore": 2 }
-]
