@@ -1,0 +1,6 @@
+[
+  { "id": "t-u13", "example": true, "category": "U13", "season": "[2026-2027]", "status": "actif", "photo": "", "coach": "[Nom de l'entraîneur]", "coachPublic": false, "description": "[Présentation de l'équipe.]" },
+  { "id": "t-u15", "example": true, "category": "U15", "season": "[2026-2027]", "status": "actif", "photo": "", "coach": "[Nom de l'entraîneur]", "coachPublic": false, "description": "[Présentation de l'équipe.]" },
+  { "id": "t-u17", "example": true, "category": "U17", "season": "[2026-2027]", "status": "actif", "photo": "", "coach": "[Nom de l'entraîneur]", "coachPublic": false, "description": "[Présentation de l'équipe.]" },
+  { "id": "t-u15-prev", "example": true, "category": "U15", "season": "[2025-2026]", "status": "archive", "photo": "", "coach": "", "coachPublic": false, "description": "[Équipe de la saison précédente, conservée dans les archives.]" }
+]

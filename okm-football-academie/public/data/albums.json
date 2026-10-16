@@ -1,0 +1,4 @@
+[
+  { "id": "album-1", "example": true, "title": "[Titre de l'album]", "description": "[Description de l'événement.]", "date": "2026-10-10", "event": "[Événement]", "category": "U15", "cover": "", "images": [], "videos": [] },
+  { "id": "album-2", "example": true, "title": "[Titre du deuxième album]", "description": "[Description de l'événement.]", "date": "2026-09-20", "event": "[Événement]", "category": "", "cover": "", "images": [], "videos": [] }
+]
