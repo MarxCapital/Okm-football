@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       zip_path:
-        description: "Chemin du zip (vide = premier .zip trouvé à la racine)"
+        description: "Chemin exact de l'archive (vide = détection automatique, quel que soit le nom)"
         required: false
         default: ""
       target_dir:
@@ -15,14 +15,10 @@ on:
         description: "Retirer le dossier unique qui englobe tout"
         type: boolean
         default: true
-      overwrite:
-        description: "Écraser les fichiers existants"
+      delete_zip:
+        description: "Supprimer l'archive après extraction"
         type: boolean
         default: true
-      delete_zip:
-        description: "Supprimer le zip après extraction"
-        type: boolean
-        default: false
 
 permissions:
   contents: write
@@ -33,58 +29,68 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # Utilise le secret PAT s'il existe, sinon le token par défaut
           token: ${{ secrets.PAT || github.token }}
 
-      - name: Décompresser et placer les fichiers
+      - name: Trouver et décompresser les archives
         env:
           ZIP_PATH: ${{ inputs.zip_path }}
           TARGET: ${{ inputs.target_dir }}
           STRIP_ROOT: ${{ inputs.strip_root }}
-          OVERWRITE: ${{ inputs.overwrite }}
           DELETE_ZIP: ${{ inputs.delete_zip }}
         run: |
-          set -euo pipefail
+          set -eu
+          ROOT="$PWD"
+          LIST=$(mktemp)
 
-          # 1. Trouver le zip
-          ZIP="$ZIP_PATH"
-          if [ -z "$ZIP" ]; then
-            ZIP=$(find . -maxdepth 1 -type f -iname '*.zip' | head -n1)
-          fi
-          if [ -z "$ZIP" ] || [ ! -f "$ZIP" ]; then
-            echo "::error::Aucun fichier zip trouvé"; exit 1
-          fi
-          echo "Zip utilisé : $ZIP"
-
-          # 2. Extraire dans un dossier temporaire
-          TMP=$(mktemp -d)
-          unzip -q "$ZIP" -d "$TMP"
-          rm -rf "$TMP/__MACOSX"
-          find "$TMP" -name '.DS_Store' -delete
-
-          # 3. Si un seul dossier englobe tout, descendre dedans
-          SRC="$TMP"
-          if [ "$STRIP_ROOT" = "true" ]; then
-            COUNT=$(find "$TMP" -mindepth 1 -maxdepth 1 | wc -l)
-            ONLY=$(find "$TMP" -mindepth 1 -maxdepth 1 | head -n1)
-            if [ "$COUNT" -eq 1 ] && [ -d "$ONLY" ]; then
-              echo "Dossier englobant retiré : $(basename "$ONLY")"
-              SRC="$ONLY"
-            fi
-          fi
-
-          # 4. Copier vers la destination (fichiers cachés inclus)
-          mkdir -p "$TARGET"
-          if [ "$OVERWRITE" = "true" ]; then
-            rsync -a --exclude='.git/' "$SRC"/ "$TARGET"/
+          # 1. Trouver les archives (par signature, pas par nom)
+          if [ -n "$ZIP_PATH" ]; then
+            echo "$ZIP_PATH" > "$LIST"
           else
-            rsync -a --ignore-existing --exclude='.git/' "$SRC"/ "$TARGET"/
+            find . -type f -not -path './.git/*' \
+              -not -iname '*.docx' -not -iname '*.xlsx' -not -iname '*.pptx' \
+              -not -iname '*.odt' -not -iname '*.ods' -not -iname '*.jar' \
+              -not -iname '*.apk' -not -iname '*.epub' -print0 |
+            while IFS= read -r -d '' f; do
+              if [ "$(head -c 4 "$f" | od -An -tx1 | tr -d ' \n')" = "504b0304" ]; then
+                echo "$f"
+              fi
+            done > "$LIST"
           fi
 
-          # 5. Supprimer le zip si demandé
-          if [ "$DELETE_ZIP" = "true" ]; then
-            rm -f "$ZIP"
+          if [ ! -s "$LIST" ]; then
+            echo "::error::Aucune archive ZIP trouvée dans le dépôt"
+            echo "Fichiers présents :"; find . -type f -not -path './.git/*' | head -50
+            exit 1
           fi
+          echo "Archives détectées :"; cat "$LIST"
+
+          # 2. Extraire chaque archive
+          while IFS= read -r ZIP; do
+            echo "=== Traitement de : $ZIP"
+            TMP=$(mktemp -d)
+            unzip -q -o "$ZIP" -d "$TMP"
+            rm -rf "$TMP/__MACOSX"
+            find "$TMP" -name '.DS_Store' -delete
+
+            SRC="$TMP"
+            if [ "$STRIP_ROOT" = "true" ]; then
+              COUNT=$(find "$TMP" -mindepth 1 -maxdepth 1 | wc -l)
+              if [ "$COUNT" -eq 1 ]; then
+                ONLY=$(find "$TMP" -mindepth 1 -maxdepth 1)
+                if [ -d "$ONLY" ]; then
+                  echo "Dossier englobant retiré : $(basename "$ONLY")"
+                  SRC="$ONLY"
+                fi
+              fi
+            fi
+
+            mkdir -p "$ROOT/$TARGET"
+            rsync -a --exclude='.git/' "$SRC"/ "$ROOT/$TARGET"/
+
+            if [ "$DELETE_ZIP" = "true" ]; then
+              rm -f "$ROOT/$ZIP"
+            fi
+          done < "$LIST"
 
       - name: Commit et push
         run: |
