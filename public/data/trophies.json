@@ -1,5 +1,0 @@
-[
-  { "id": "tr-001", "example": true, "name": "[Nom du trophée]", "competition": "[Compétition]", "year": 2026, "category": "U15", "result": "[Résultat obtenu]", "photo": "", "description": "" },
-  { "id": "tr-002", "example": true, "name": "[Nom du trophée]", "competition": "[Compétition]", "year": 2025, "category": "U13", "result": "[Résultat obtenu]", "photo": "", "description": "" },
-  { "id": "tr-003", "example": true, "name": "[Nom du trophée]", "competition": "[Compétition]", "year": 2025, "category": "U17", "result": "[Résultat obtenu]", "photo": "", "description": "" }
-]
